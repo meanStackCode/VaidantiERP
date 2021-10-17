@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:test_app_flutter/home/projectDetail/project_detail.dart';
 import 'package:test_app_flutter/models/dashboardModel/my_projects_response_model.dart';
 import 'package:test_app_flutter/utils/constants.dart';
 import 'package:test_app_flutter/utils/prefs.dart';
@@ -61,84 +62,81 @@ class MyProjectsPageState extends State<MyProjectsScreen> {
                                 itemCount: projectsSearchResult.length ?? 0,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Card(
-                                    elevation: 5.0,
-                                    shadowColor: Colors.grey,
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 12.0, vertical: 12.0),
-                                      child: Column(
-                                        children: [
-                                          Row(children: [
-                                            Flexible(
-                                              child: RichText(
-                                                  text: TextSpan(
-                                                      text: projectsSearchResult[
-                                                                  index]
-                                                              ?.projectName ??
-                                                          '',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16.0,
-                                                        fontFamily: 'Ubuntu',
-                                                        fontWeight:
-                                                            FontWeight.w800,
-                                                      ),
-                                                      children: [
-                                                    TextSpan(
-                                                      text:
-                                                          ' (${projectsSearchResult[index]?.countryUniqueId ?? ''})',
-                                                      style: TextStyle(
-                                                        color: Colors.blue[600],
-                                                        fontFamily: 'Ubuntu',
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14.0,
-                                                      ),
-                                                    )
-                                                  ])),
-                                            )
-                                          ]),
-                                          SizedBox(height: 10.0),
-                                          Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                    projectsSearchResult[index]
-                                                            ?.projectManager ??
-                                                        '',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      color: Colors.red[600],
-                                                      fontSize: 14.0,
-                                                      fontFamily: 'Ubuntu',
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                    )),
+                                      elevation: 5.0,
+                                      shadowColor: Colors.grey,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProjectDetailScreen()),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 12.0, vertical: 12.0),
+                                          child: Column(
+                                            children: [
+                                              Row(children: [
                                                 Flexible(
                                                   child: RichText(
                                                       text: TextSpan(
-                                                    text:
-                                                        '${projectsSearchResult[index]?.projectUniqueId ?? ''} ',
-                                                    style: TextStyle(
-                                                      color: Colors.grey[850],
-                                                      fontSize: 14.0,
-                                                      fontFamily: 'Ubuntu',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  )),
-                                                ),
+                                                          text: projectsSearchResult[
+                                                                      index]
+                                                                  ?.projectName ??
+                                                              '',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16.0,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight.w800,
+                                                          ),
+                                                          children: [
+                                                        TextSpan(
+                                                          text:
+                                                              ' (${projectsSearchResult[index]?.countryUniqueId ?? ''})',
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .blue[600],
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 14.0,
+                                                          ),
+                                                        )
+                                                      ])),
+                                                )
                                               ]),
-                                          SizedBox(height: 5.0),
-                                          Row(
-                                            children: [
-                                              Flexible(
-                                                child: RichText(
-                                                    text: TextSpan(
+                                              SizedBox(height: 10.0),
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                        projectsSearchResult[
+                                                                    index]
+                                                                ?.projectManager ??
+                                                            '',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          color:
+                                                              Colors.red[600],
+                                                          fontSize: 14.0,
+                                                          fontFamily: 'Ubuntu',
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        )),
+                                                    Flexible(
+                                                      child: RichText(
+                                                          text: TextSpan(
                                                         text:
-                                                            '${projectsSearchResult[index]?.clientName ?? ''} ',
+                                                            '${projectsSearchResult[index]?.projectUniqueId ?? ''} ',
                                                         style: TextStyle(
                                                           color:
                                                               Colors.grey[850],
@@ -147,181 +145,209 @@ class MyProjectsPageState extends State<MyProjectsScreen> {
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
-                                                        children: [
-                                                      TextSpan(
-                                                        text: '(Client)',
+                                                      )),
+                                                    ),
+                                                  ]),
+                                              SizedBox(height: 5.0),
+                                              Row(
+                                                children: [
+                                                  Flexible(
+                                                    child: RichText(
+                                                        text: TextSpan(
+                                                            text:
+                                                                '${projectsSearchResult[index]?.clientName ?? ''} ',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[850],
+                                                              fontSize: 14.0,
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                            children: [
+                                                          TextSpan(
+                                                            text: '(Client)',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .blue[600],
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 12.0,
+                                                            ),
+                                                          )
+                                                        ])),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 5.0),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Flexible(
+                                                    child: RichText(
+                                                        text: TextSpan(
+                                                            text:
+                                                                '${projectsSearchResult[index]?.enterAmount ?? ''} ',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[850],
+                                                              fontSize: 14.0,
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                            children: [
+                                                          TextSpan(
+                                                            text:
+                                                                '${projectsSearchResult[index]?.currency ?? ''}',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[600],
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 14.0,
+                                                            ),
+                                                          ),
+                                                          TextSpan(
+                                                            text:
+                                                                '(\$ ${projectsSearchResult[index]?.projectvalue ?? ''})',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .blue[600],
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 12.0,
+                                                            ),
+                                                          )
+                                                        ])),
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                        color: getStatusColor(
+                                                                projectsSearchResult[
+                                                                            index]
+                                                                        ?.projectStatus ??
+                                                                    '')
+                                                            .toColor(),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    2.0))),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 6.0,
+                                                            vertical: 3.0),
+                                                    child: Text(
+                                                        '${projectsSearchResult[index]?.projectStatus?.toUpperCase() ?? 'None'}',
                                                         style: TextStyle(
-                                                          color:
-                                                              Colors.blue[600],
+                                                          color: Colors.white,
+                                                          fontSize: 12.0,
                                                           fontFamily: 'Ubuntu',
                                                           fontWeight:
                                                               FontWeight.w500,
-                                                          fontSize: 12.0,
-                                                        ),
-                                                      )
-                                                    ])),
+                                                        )),
+                                                  )
+                                                ],
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 5.0),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                child: RichText(
-                                                    text: TextSpan(
-                                                        text:
-                                                            '${projectsSearchResult[index]?.enterAmount ?? ''} ',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.grey[850],
-                                                          fontSize: 14.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                        children: [
-                                                      TextSpan(
-                                                        text:
-                                                            '${projectsSearchResult[index]?.currency ?? ''}',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.grey[600],
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            '(\$ ${projectsSearchResult[index]?.projectvalue ?? ''})',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.blue[600],
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12.0,
-                                                        ),
-                                                      )
-                                                    ])),
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                    color: getStatusColor(
-                                                            projectsSearchResult[
-                                                                        index]
-                                                                    ?.projectStatus ??
-                                                                '')
-                                                        .toColor(),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                2.0))),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 6.0,
-                                                    vertical: 3.0),
-                                                child: Text(
-                                                    '${projectsSearchResult[index]?.projectStatus?.toUpperCase() ?? 'None'}',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12.0,
-                                                      fontFamily: 'Ubuntu',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    )),
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
+                                        ),
+                                      ));
                                 })
                             : ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: projectsData.length ?? 0,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Card(
-                                    elevation: 5.0,
-                                    shadowColor: Colors.grey,
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 12.0, vertical: 12.0),
-                                      child: Column(
-                                        children: [
-                                          Row(children: [
-                                            Flexible(
-                                              child: RichText(
-                                                  text: TextSpan(
-                                                      text: projectsData[index]
-                                                              ?.projectName ??
-                                                          '',
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 16.0,
-                                                        fontFamily: 'Ubuntu',
-                                                        fontWeight:
-                                                            FontWeight.w800,
-                                                      ),
-                                                      children: [
-                                                    TextSpan(
-                                                      text:
-                                                          ' (${projectsData[index]?.countryUniqueId ?? ''})',
-                                                      style: TextStyle(
-                                                        color: Colors.blue[600],
-                                                        fontFamily: 'Ubuntu',
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14.0,
-                                                      ),
-                                                    )
-                                                  ])),
-                                            )
-                                          ]),
-                                          SizedBox(height: 10.0),
-                                          Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                    projectsData[index]
-                                                            ?.projectManager ??
-                                                        '',
-                                                    textAlign: TextAlign.center,
-                                                    style: TextStyle(
-                                                      color: Colors.red[600],
-                                                      fontSize: 14.0,
-                                                      fontFamily: 'Ubuntu',
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                    )),
+                                      elevation: 5.0,
+                                      shadowColor: Colors.grey,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProjectDetailScreen()),
+                                          );
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 12.0, vertical: 12.0),
+                                          child: Column(
+                                            children: [
+                                              Row(children: [
                                                 Flexible(
                                                   child: RichText(
                                                       text: TextSpan(
-                                                    text:
-                                                        '${projectsData[index]?.projectUniqueId ?? ''} ',
-                                                    style: TextStyle(
-                                                      color: Colors.grey[850],
-                                                      fontSize: 14.0,
-                                                      fontFamily: 'Ubuntu',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  )),
-                                                ),
+                                                          text: projectsData[
+                                                                      index]
+                                                                  ?.projectName ??
+                                                              '',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16.0,
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight.w800,
+                                                          ),
+                                                          children: [
+                                                        TextSpan(
+                                                          text:
+                                                              ' (${projectsData[index]?.countryUniqueId ?? ''})',
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .blue[600],
+                                                            fontFamily:
+                                                                'Ubuntu',
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontSize: 14.0,
+                                                          ),
+                                                        )
+                                                      ])),
+                                                )
                                               ]),
-                                          SizedBox(height: 5.0),
-                                          Row(
-                                            children: [
-                                              Flexible(
-                                                child: RichText(
-                                                    text: TextSpan(
+                                              SizedBox(height: 10.0),
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                        projectsData[index]
+                                                                ?.projectManager ??
+                                                            '',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                          color:
+                                                              Colors.red[600],
+                                                          fontSize: 14.0,
+                                                          fontFamily: 'Ubuntu',
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        )),
+                                                    Flexible(
+                                                      child: RichText(
+                                                          text: TextSpan(
                                                         text:
-                                                            '${projectsData[index]?.clientName ?? ''} ',
+                                                            '${projectsData[index]?.projectUniqueId ?? ''} ',
                                                         style: TextStyle(
                                                           color:
                                                               Colors.grey[850],
@@ -330,97 +356,129 @@ class MyProjectsPageState extends State<MyProjectsScreen> {
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
-                                                        children: [
-                                                      TextSpan(
-                                                        text: '(Client)',
+                                                      )),
+                                                    ),
+                                                  ]),
+                                              SizedBox(height: 5.0),
+                                              Row(
+                                                children: [
+                                                  Flexible(
+                                                    child: RichText(
+                                                        text: TextSpan(
+                                                            text:
+                                                                '${projectsData[index]?.clientName ?? ''} ',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[850],
+                                                              fontSize: 14.0,
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                            children: [
+                                                          TextSpan(
+                                                            text: '(Client)',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .blue[600],
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 12.0,
+                                                            ),
+                                                          )
+                                                        ])),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(height: 5.0),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Flexible(
+                                                    child: RichText(
+                                                        text: TextSpan(
+                                                            text:
+                                                                '${projectsData[index]?.enterAmount ?? ''} ',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[850],
+                                                              fontSize: 14.0,
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                            children: [
+                                                          TextSpan(
+                                                            text:
+                                                                '${projectsData[index]?.currency ?? ''} ',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .grey[600],
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 14.0,
+                                                            ),
+                                                          ),
+                                                          TextSpan(
+                                                            text:
+                                                                '(\$ ${projectsData[index]?.projectvalue ?? ''})',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .blue[600],
+                                                              fontFamily:
+                                                                  'Ubuntu',
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 12.0,
+                                                            ),
+                                                          )
+                                                        ])),
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                        color: getStatusColor(
+                                                                projectsData[
+                                                                            index]
+                                                                        ?.projectStatus ??
+                                                                    '')
+                                                            .toColor(),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    2.0))),
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 6.0,
+                                                            vertical: 3.0),
+                                                    child: Text(
+                                                        '${projectsData[index]?.projectStatus?.toUpperCase() ?? 'None'}',
                                                         style: TextStyle(
-                                                          color:
-                                                              Colors.blue[600],
+                                                          color: Colors.white,
+                                                          fontSize: 12.0,
                                                           fontFamily: 'Ubuntu',
                                                           fontWeight:
                                                               FontWeight.w500,
-                                                          fontSize: 12.0,
-                                                        ),
-                                                      )
-                                                    ])),
+                                                        )),
+                                                  )
+                                                ],
                                               ),
                                             ],
                                           ),
-                                          SizedBox(height: 5.0),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Flexible(
-                                                child: RichText(
-                                                    text: TextSpan(
-                                                        text:
-                                                            '${projectsData[index]?.enterAmount ?? ''} ',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.grey[850],
-                                                          fontSize: 14.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                        children: [
-                                                      TextSpan(
-                                                        text:
-                                                            '${projectsData[index]?.currency ?? ''} ',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.grey[600],
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            '(\$ ${projectsData[index]?.projectvalue ?? ''})',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.blue[600],
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 12.0,
-                                                        ),
-                                                      )
-                                                    ])),
-                                              ),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                    color: getStatusColor(
-                                                            projectsData[index]
-                                                                    ?.projectStatus ??
-                                                                '')
-                                                        .toColor(),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                2.0))),
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 6.0,
-                                                    vertical: 3.0),
-                                                child: Text(
-                                                    '${projectsData[index]?.projectStatus?.toUpperCase() ?? 'None'}',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12.0,
-                                                      fontFamily: 'Ubuntu',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    )),
-                                              )
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
+                                        ),
+                                      ));
                                 }),
                       )
                     ],

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:scroll_app_bar/scroll_app_bar.dart';
+import 'package:test_app_flutter/home/leadsDetail/leads_detail.dart';
 import 'package:test_app_flutter/models/dashboardModel/leads_response_model.dart';
 import 'package:test_app_flutter/utils/constants.dart';
 import 'package:test_app_flutter/utils/prefs.dart';
@@ -54,418 +55,504 @@ class LeadsScreenState extends State<LeadsScreen> {
                 ? CircularProgressIndicator(
                     color: Colors.blue, strokeWidth: 4.0)
                 : SafeArea(
-                  minimum: EdgeInsets.only(top: 10.0),
+                    minimum: EdgeInsets.only(top: 10.0),
                     child: Container(
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 12.0, vertical: 14.0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(0.0),
-                          child: new Card(
-                            elevation: 4.0,
-                            shadowColor: Colors.grey[800],
-                            child: TextField(
-                              textAlignVertical: TextAlignVertical.center,
-                              onChanged: onSearchTextChanged,
-                              controller: searchController,
-                              decoration: InputDecoration(
-                                  hintText: "Search",
-                                  prefixIcon: Icon(Icons.search),
-                                  border: InputBorder.none),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 12.0, vertical: 14.0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(0.0),
+                            child: new Card(
+                              elevation: 4.0,
+                              shadowColor: Colors.grey[800],
+                              child: TextField(
+                                textAlignVertical: TextAlignVertical.center,
+                                onChanged: onSearchTextChanged,
+                                controller: searchController,
+                                decoration: InputDecoration(
+                                    hintText: "Search",
+                                    prefixIcon: Icon(Icons.search),
+                                    border: InputBorder.none),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 10.0),
-                        Expanded(
-                            child: leadsSearchResult.length != 0 ||
-                                    searchController.text.isNotEmpty
-                                ? ListView.builder(
-                                    controller: controller,
-                                    shrinkWrap: true,
-                                    itemCount: leadsSearchResult.length ?? 0,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Card(
-                                        elevation: 5.0,
-                                        shadowColor: Colors.grey,
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 12.0, vertical: 12.0),
-                                          child: Column(
-                                            children: [
-                                              Row(children: [
-                                                Flexible(
-                                                  child: RichText(
-                                                      text: TextSpan(
-                                                          text: leadsSearchResult[
-                                                                      index]
-                                                                  ?.projectScope ??
-                                                              '',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 16.0,
-                                                            fontFamily:
-                                                                'Ubuntu',
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                          ),
-                                                          children: [
-                                                        TextSpan(
-                                                          text:
-                                                              ' (${leadsSearchResult[index]?.countryUniqueId ?? ''})',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .blue[600],
-                                                            fontFamily:
-                                                                'Ubuntu',
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14.0,
-                                                          ),
-                                                        )
-                                                      ])),
-                                                )
-                                              ]),
-                                              SizedBox(height: 5.0),
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Flexible(
-                                                      child: Text(
-                                                          leadsSearchResult[
-                                                                      index]
-                                                                  ?.projectType ??
-                                                              '',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .grey[800],
-                                                            fontSize: 14.0,
-                                                            fontFamily:
-                                                                'Ubuntu',
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                          )),
-                                                    ),
-                                                  ]),
-                                              SizedBox(height: 8.0),
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                        leadsSearchResult[index]
-                                                                ?.clientName ??
-                                                            '',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.red[600],
-                                                          fontSize: 14.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w800,
-                                                        )),
-                                                    Flexible(
-                                                      child: RichText(
-                                                          text: TextSpan(
-                                                        text:
-                                                            '${leadsSearchResult[index]?.leadsUniqueId ?? ''} ',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.grey[850],
-                                                          fontSize: 14.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      )),
-                                                    ),
-                                                  ]),
-                                              SizedBox(height: 5.0),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Flexible(
-                                                    child: RichText(
-                                                        text: TextSpan(
-                                                            text:
-                                                                '${leadsSearchResult[index]?.enterAmount ?? ''} ',
-                                                            style: TextStyle(
-                                                              color: Colors
-                                                                  .grey[850],
-                                                              fontSize: 14.0,
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                            children: [
-                                                          TextSpan(
-                                                            text:
-                                                                '${leadsSearchResult[index]?.currency ?? ''} ',
-                                                            style: TextStyle(
-                                                              color: Colors
-                                                                  .grey[600],
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 14.0,
-                                                            ),
-                                                          ),
-                                                          TextSpan(
-                                                            text:
-                                                                '(\$ ${leadsSearchResult[index]?.expectedRevenue ?? ''})',
-                                                            style: TextStyle(
-                                                              color: Colors
-                                                                  .blue[600],
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 12.0,
-                                                            ),
-                                                          )
-                                                        ])),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        color: getStatusColor(
-                                                                leadsSearchResult[
-                                                                            index]
-                                                                        ?.leadActivityStatus ??
-                                                                    '')
-                                                            .toColor(),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    2.0))),
+                          SizedBox(height: 10.0),
+                          Expanded(
+                              child:
+                                  leadsSearchResult.length != 0 ||
+                                          searchController.text.isNotEmpty
+                                      ? ListView.builder(
+                                          controller: controller,
+                                          shrinkWrap: true,
+                                          itemCount:
+                                              leadsSearchResult.length ?? 0,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Card(
+                                              elevation: 5.0,
+                                              shadowColor: Colors.grey,
+                                              child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              LeadsDetailScreen()),
+                                                    );
+                                                  },
+                                                  child: Container(
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            horizontal: 6.0,
-                                                            vertical: 3.0),
-                                                    child: Text(
-                                                        '${leadsSearchResult[index]?.leadActivityStatus?.toUpperCase() ?? 'None'}',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        )),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    })
-                                : ListView.builder(
-                                    controller: controller,
-                                    shrinkWrap: true,
-                                    itemCount: leadsData.length ?? 0,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Card(
-                                        elevation: 5.0,
-                                        shadowColor: Colors.grey,
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 12.0, vertical: 12.0),
-                                          child: Column(
-                                            children: [
-                                              Row(children: [
-                                                Flexible(
-                                                  child: RichText(
-                                                      text: TextSpan(
-                                                          text: leadsData[index]
-                                                                  ?.projectScope ??
-                                                              '',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 16.0,
-                                                            fontFamily:
-                                                                'Ubuntu',
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                          ),
-                                                          children: [
-                                                        TextSpan(
-                                                          text:
-                                                              ' (${leadsData[index]?.countryUniqueId ?? ''})',
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .blue[600],
-                                                            fontFamily:
-                                                                'Ubuntu',
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14.0,
-                                                          ),
-                                                        )
-                                                      ])),
-                                                )
-                                              ]),
-                                              SizedBox(height: 5.0),
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Flexible(
-                                                      child: Text(
-                                                          leadsData[index]
-                                                                  ?.projectType ??
-                                                              '',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                            color: Colors
-                                                                .grey[800],
-                                                            fontSize: 14.0,
-                                                            fontFamily:
-                                                                'Ubuntu',
-                                                            fontWeight:
-                                                                FontWeight.w800,
-                                                          )),
-                                                    )
-                                                  ]),
-                                              SizedBox(height: 8.0),
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                        leadsData[index]
-                                                                ?.clientName ??
-                                                            '',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.red[600],
-                                                          fontSize: 14.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w800,
-                                                        )),
-                                                    Flexible(
-                                                      child: RichText(
-                                                          text: TextSpan(
-                                                        text:
-                                                            '${leadsData[index]?.leadsUniqueId ?? ''} ',
-                                                        style: TextStyle(
-                                                          color:
-                                                              Colors.grey[850],
-                                                          fontSize: 14.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      )),
-                                                    ),
-                                                  ]),
-                                              SizedBox(height: 5.0),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Flexible(
-                                                    child: RichText(
-                                                        text: TextSpan(
-                                                            text:
-                                                                '${leadsData[index]?.enterAmount ?? ''} ',
-                                                            style: TextStyle(
-                                                              color: Colors
-                                                                  .grey[850],
-                                                              fontSize: 14.0,
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                            children: [
-                                                          TextSpan(
-                                                            text:
-                                                                '${leadsData[index]?.currency ?? ''} ',
-                                                            style: TextStyle(
-                                                              color: Colors
-                                                                  .grey[600],
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 14.0,
-                                                            ),
-                                                          ),
-                                                          TextSpan(
-                                                            text:
-                                                                '(\$ ${leadsData[index]?.expectedRevenue ?? ''})',
-                                                            style: TextStyle(
-                                                              color: Colors
-                                                                  .blue[600],
-                                                              fontFamily:
-                                                                  'Ubuntu',
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 12.0,
-                                                            ),
+                                                            horizontal: 12.0,
+                                                            vertical: 12.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(children: [
+                                                          Flexible(
+                                                            child: RichText(
+                                                                text: TextSpan(
+                                                                    text: leadsSearchResult[index]
+                                                                            ?.projectScope ??
+                                                                        '',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      fontFamily:
+                                                                          'Ubuntu',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                    ),
+                                                                    children: [
+                                                                  TextSpan(
+                                                                    text:
+                                                                        ' (${leadsSearchResult[index]?.countryUniqueId ?? ''})',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                              .blue[
+                                                                          600],
+                                                                      fontFamily:
+                                                                          'Ubuntu',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                    ),
+                                                                  )
+                                                                ])),
                                                           )
-                                                        ])),
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        color: getStatusColor(
-                                                                leadsData[index]
-                                                                        ?.leadActivityStatus ??
-                                                                    '')
-                                                            .toColor(),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    2.0))),
+                                                        ]),
+                                                        SizedBox(height: 5.0),
+                                                        Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Flexible(
+                                                                child: Text(
+                                                                    leadsSearchResult[index]
+                                                                            ?.projectType ??
+                                                                        '',
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                              .grey[
+                                                                          800],
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      fontFamily:
+                                                                          'Ubuntu',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                    )),
+                                                              ),
+                                                            ]),
+                                                        SizedBox(height: 8.0),
+                                                        Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                  leadsSearchResult[
+                                                                              index]
+                                                                          ?.clientName ??
+                                                                      '',
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                            .red[
+                                                                        600],
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    fontFamily:
+                                                                        'Ubuntu',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                  )),
+                                                              Flexible(
+                                                                child: RichText(
+                                                                    text:
+                                                                        TextSpan(
+                                                                  text:
+                                                                      '${leadsSearchResult[index]?.leadsUniqueId ?? ''} ',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                            .grey[
+                                                                        850],
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    fontFamily:
+                                                                        'Ubuntu',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                                )),
+                                                              ),
+                                                            ]),
+                                                        SizedBox(height: 5.0),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Flexible(
+                                                              child: RichText(
+                                                                  text: TextSpan(
+                                                                      text: '${leadsSearchResult[index]?.enterAmount ?? ''} ',
+                                                                      style: TextStyle(
+                                                                        color: Colors
+                                                                            .grey[850],
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        fontFamily:
+                                                                            'Ubuntu',
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                      ),
+                                                                      children: [
+                                                                    TextSpan(
+                                                                      text:
+                                                                          '${leadsSearchResult[index]?.currency ?? ''} ',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .grey[600],
+                                                                        fontFamily:
+                                                                            'Ubuntu',
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                      ),
+                                                                    ),
+                                                                    TextSpan(
+                                                                      text:
+                                                                          '(\$ ${leadsSearchResult[index]?.expectedRevenue ?? ''})',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .blue[600],
+                                                                        fontFamily:
+                                                                            'Ubuntu',
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        fontSize:
+                                                                            12.0,
+                                                                      ),
+                                                                    )
+                                                                  ])),
+                                                            ),
+                                                            Container(
+                                                              decoration: BoxDecoration(
+                                                                  color: getStatusColor(
+                                                                          leadsSearchResult[index]?.leadActivityStatus ??
+                                                                              '')
+                                                                      .toColor(),
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              2.0))),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          6.0,
+                                                                      vertical:
+                                                                          3.0),
+                                                              child: Text(
+                                                                  '${leadsSearchResult[index]?.leadActivityStatus?.toUpperCase() ?? 'None'}',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    fontFamily:
+                                                                        'Ubuntu',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  )),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )),
+                                            );
+                                          })
+                                      : ListView.builder(
+                                          controller: controller,
+                                          shrinkWrap: true,
+                                          itemCount: leadsData.length ?? 0,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Card(
+                                                elevation: 5.0,
+                                                shadowColor: Colors.grey,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              LeadsDetailScreen()),
+                                                    );
+                                                  },
+                                                  child: Container(
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            horizontal: 6.0,
-                                                            vertical: 3.0),
-                                                    child: Text(
-                                                        '${leadsData[index]?.leadActivityStatus?.toUpperCase() ?? 'None'}',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontSize: 12.0,
-                                                          fontFamily: 'Ubuntu',
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        )),
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    }))
-                      ],
-                    ),
-                  )),
+                                                            horizontal: 12.0,
+                                                            vertical: 12.0),
+                                                    child: Column(
+                                                      children: [
+                                                        Row(children: [
+                                                          Flexible(
+                                                            child: RichText(
+                                                                text: TextSpan(
+                                                                    text: leadsData[index]
+                                                                            ?.projectScope ??
+                                                                        '',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                          .black,
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      fontFamily:
+                                                                          'Ubuntu',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                    ),
+                                                                    children: [
+                                                                  TextSpan(
+                                                                    text:
+                                                                        ' (${leadsData[index]?.countryUniqueId ?? ''})',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                              .blue[
+                                                                          600],
+                                                                      fontFamily:
+                                                                          'Ubuntu',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                    ),
+                                                                  )
+                                                                ])),
+                                                          )
+                                                        ]),
+                                                        SizedBox(height: 5.0),
+                                                        Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Flexible(
+                                                                child: Text(
+                                                                    leadsData[index]
+                                                                            ?.projectType ??
+                                                                        '',
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Colors
+                                                                              .grey[
+                                                                          800],
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      fontFamily:
+                                                                          'Ubuntu',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                    )),
+                                                              )
+                                                            ]),
+                                                        SizedBox(height: 8.0),
+                                                        Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                  leadsData[index]
+                                                                          ?.clientName ??
+                                                                      '',
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                            .red[
+                                                                        600],
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    fontFamily:
+                                                                        'Ubuntu',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                  )),
+                                                              Flexible(
+                                                                child: RichText(
+                                                                    text:
+                                                                        TextSpan(
+                                                                  text:
+                                                                      '${leadsData[index]?.leadsUniqueId ?? ''} ',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                            .grey[
+                                                                        850],
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    fontFamily:
+                                                                        'Ubuntu',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                                )),
+                                                              ),
+                                                            ]),
+                                                        SizedBox(height: 5.0),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Flexible(
+                                                              child: RichText(
+                                                                  text: TextSpan(
+                                                                      text: '${leadsData[index]?.enterAmount ?? ''} ',
+                                                                      style: TextStyle(
+                                                                        color: Colors
+                                                                            .grey[850],
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        fontFamily:
+                                                                            'Ubuntu',
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                      ),
+                                                                      children: [
+                                                                    TextSpan(
+                                                                      text:
+                                                                          '${leadsData[index]?.currency ?? ''} ',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .grey[600],
+                                                                        fontFamily:
+                                                                            'Ubuntu',
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                      ),
+                                                                    ),
+                                                                    TextSpan(
+                                                                      text:
+                                                                          '(\$ ${leadsData[index]?.expectedRevenue ?? ''})',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: Colors
+                                                                            .blue[600],
+                                                                        fontFamily:
+                                                                            'Ubuntu',
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        fontSize:
+                                                                            12.0,
+                                                                      ),
+                                                                    )
+                                                                  ])),
+                                                            ),
+                                                            Container(
+                                                              decoration: BoxDecoration(
+                                                                  color: getStatusColor(
+                                                                          leadsData[index]?.leadActivityStatus ??
+                                                                              '')
+                                                                      .toColor(),
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              2.0))),
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          6.0,
+                                                                      vertical:
+                                                                          3.0),
+                                                              child: Text(
+                                                                  '${leadsData[index]?.leadActivityStatus?.toUpperCase() ?? 'None'}',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        12.0,
+                                                                    fontFamily:
+                                                                        'Ubuntu',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  )),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ));
+                                          }))
+                        ],
+                      ),
+                    )),
           ),
         ),
       ),
