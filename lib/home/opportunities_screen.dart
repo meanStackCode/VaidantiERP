@@ -93,7 +93,10 @@ class OpportunitiesScreenState extends State<OpportunitiesScreen> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        OpportunityDetailScreen()),
+                                                        OpportunityDetailScreen(
+                                                            opportunitiesData:
+                                                                opportunitiesSearchResult[
+                                                                    index])),
                                               );
                                             },
                                             child: Container(
@@ -317,7 +320,10 @@ class OpportunitiesScreenState extends State<OpportunitiesScreen> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        OpportunityDetailScreen()),
+                                                        OpportunityDetailScreen(
+                                                            opportunitiesData:
+                                                                opportunitiesSearchResult[
+                                                                    index])),
                                               );
                                             },
                                             child: Container(

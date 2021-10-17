@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:test_app_flutter/models/dashboardModel/opportunities_response_model.dart';
 
 class OpportunityDetailScreen extends StatefulWidget {
+  const OpportunityDetailScreen({Key key, this.opportunitiesData})
+      : super(key: key);
+  final OpportunitiesData opportunitiesData;
   @override
   State<StatefulWidget> createState() => OpportunityDetailScreenState();
 }
@@ -35,7 +39,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                   ),
                   Container(
                     alignment: Alignment.topLeft,
-                    child: Text('Client Name',
+                    child: Text(widget.opportunitiesData.clientName ?? '',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16.0,
@@ -98,7 +102,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.projectType ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -137,7 +141,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.opportunityName ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -176,7 +180,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.stages ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -215,7 +219,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.probabilityWinning ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -254,7 +258,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.empactLeadOwner ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -293,7 +297,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.leadOriginDate ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -332,7 +336,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.leadCloseDate ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -371,7 +375,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.leadAging ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -410,7 +414,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.clientContact ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -449,7 +453,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.contractingStatus ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -488,7 +492,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.proposalDate ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -527,7 +531,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.proposalDevelopBy ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -566,7 +570,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.proposalStatus ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -605,7 +609,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.tentativeProjectStartDate ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -644,7 +648,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.tentativeProjectEndDate ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -683,7 +687,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.tentativeDuration ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -722,7 +726,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.clientFlexibilityOnProject ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -761,7 +765,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.empactLeadOwner ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -800,7 +804,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text('${widget.opportunitiesData.enterAmount ?? ''} ${widget.opportunitiesData.enterAmount ?? ''}',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -839,7 +843,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text('\$ ${widget.opportunitiesData.expectedRevenue ?? ''}',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -878,7 +882,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.newLink ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -917,7 +921,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.nextAction ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -956,7 +960,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                     ),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
+                      child: Text(widget.opportunitiesData.nextActionDate ?? '',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black87,
@@ -966,45 +970,45 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
                           )),
                     ),
                   ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Text('Participants',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16.0,
-                          fontFamily: 'Ubuntu',
-                          fontWeight: FontWeight.w500,
-                        )),
-                  ),
-                  SizedBox(
-                    height: 6,
-                  ),
-                  Container(
-                    height: 40,
-                    padding: EdgeInsets.only(left: 16.0),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 0.2,
-                        color: Colors.grey,
-                      ),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text('ABCd',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 14.0,
-                            fontFamily: 'Ubuntu',
-                            fontWeight: FontWeight.w300,
-                          )),
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 16.0,
+                  // ),
+                  // Container(
+                  //   alignment: Alignment.topLeft,
+                  //   child: Text('Participants',
+                  //       style: TextStyle(
+                  //         color: Colors.black,
+                  //         fontSize: 16.0,
+                  //         fontFamily: 'Ubuntu',
+                  //         fontWeight: FontWeight.w500,
+                  //       )),
+                  // ),
+                  // SizedBox(
+                  //   height: 6,
+                  // ),
+                  // Container(
+                  //   height: 40,
+                  //   padding: EdgeInsets.only(left: 16.0),
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     border: Border.all(
+                  //       width: 0.2,
+                  //       color: Colors.grey,
+                  //     ),
+                  //     borderRadius: BorderRadius.circular(4.0),
+                  //   ),
+                  //   child: Align(
+                  //     alignment: Alignment.centerLeft,
+                  //     child: Text('ABCd',
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(
+                  //           color: Colors.black87,
+                  //           fontSize: 14.0,
+                  //           fontFamily: 'Ubuntu',
+                  //           fontWeight: FontWeight.w300,
+                  //         )),
+                  //   ),
+                  // ),
                   SizedBox(
                     height: 20.0,
                   ),
