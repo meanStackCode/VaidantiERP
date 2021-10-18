@@ -94,9 +94,10 @@ class OpportunitiesScreenState extends State<OpportunitiesScreen> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         OpportunityDetailScreen(
-                                                            opportunitiesData:
-                                                                opportunitiesSearchResult[
-                                                                    index])),
+                                                          opportunitiesData:
+                                                              opportunitiesSearchResult[
+                                                                  index],
+                                                        )),
                                               );
                                             },
                                             child: Container(
@@ -321,9 +322,10 @@ class OpportunitiesScreenState extends State<OpportunitiesScreen> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         OpportunityDetailScreen(
-                                                            opportunitiesData:
-                                                                opportunitiesSearchResult[
-                                                                    index])),
+                                                          opportunitiesData:
+                                                              opportunitiesData[
+                                                                  index],
+                                                        )),
                                               );
                                             },
                                             child: Container(
