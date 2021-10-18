@@ -70,7 +70,11 @@ class MyProjectsPageState extends State<MyProjectsScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ProjectDetailScreen()),
+                                                    ProjectDetailScreen(
+                                                      projectData:
+                                                          projectsSearchResult[
+                                                              index],
+                                                    )),
                                           );
                                         },
                                         child: Container(
@@ -282,7 +286,10 @@ class MyProjectsPageState extends State<MyProjectsScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ProjectDetailScreen()),
+                                                    ProjectDetailScreen(
+                                                      projectData:
+                                                          projectsData[index],
+                                                    )),
                                           );
                                         },
                                         child: Container(

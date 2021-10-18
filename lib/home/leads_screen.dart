@@ -98,7 +98,11 @@ class LeadsScreenState extends State<LeadsScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              LeadsDetailScreen()),
+                                                              LeadsDetailScreen(
+                                                                leadsData:
+                                                                    leadsSearchResult[
+                                                                        index],
+                                                              )),
                                                     );
                                                   },
                                                   child: Container(
@@ -332,7 +336,11 @@ class LeadsScreenState extends State<LeadsScreen> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              LeadsDetailScreen()),
+                                                              LeadsDetailScreen(
+                                                                leadsData:
+                                                                    leadsData[
+                                                                        index],
+                                                              )),
                                                     );
                                                   },
                                                   child: Container(

@@ -94,6 +94,7 @@ class MyProjectsData {
   String clientContact1;
   String clientContact2;
   String contractStatus;
+  String consultantName;
   String clientFlexibilityOnProject;
   String projectType;
   String empactLeadOwner;
@@ -146,6 +147,7 @@ class MyProjectsData {
   String countryCodeBill;
   String consultantsId;
   String vendorId;
+  String vendorName;
   String clientName;
   String projectManager;
 
@@ -161,6 +163,7 @@ class MyProjectsData {
       this.clientId,
       this.progress,
       this.calculateProgress,
+      this.consultantName,
       this.startDate,
       this.endDate,
       this.alertOverdue,
@@ -265,6 +268,7 @@ class MyProjectsData {
       this.countryCodeBill,
       this.consultantsId,
       this.vendorId,
+      this.vendorName,
       this.clientName,
       this.projectManager});
 
@@ -278,6 +282,7 @@ class MyProjectsData {
     companyId = json['company_id'];
     categoryId = json['category_id'];
     clientId = json['client_id'];
+    consultantName = json['consultant_name'];
     progress = json['progress'];
     calculateProgress = json['calculate_progress'];
     startDate = json['start_date'];
@@ -384,6 +389,7 @@ class MyProjectsData {
     countryCodeBill = json['country_code_bill'];
     consultantsId = json['consultants_id'];
     vendorId = json['vendor_id'];
+    vendorName = json['vendor_name'];
     clientName = json['client_name'];
     projectManager = json['project_manager'];
   }
@@ -401,6 +407,7 @@ class MyProjectsData {
     data['client_id'] = this.clientId;
     data['progress'] = this.progress;
     data['calculate_progress'] = this.calculateProgress;
+    data['consultant_name'] = this.consultantName;
     data['start_date'] = this.startDate;
     data['end_date'] = this.endDate;
     data['alert_overdue'] = this.alertOverdue;
@@ -505,6 +512,7 @@ class MyProjectsData {
     data['country_code_bill'] = this.countryCodeBill;
     data['consultants_id'] = this.consultantsId;
     data['vendor_id'] = this.vendorId;
+    data['vendor_name'] = this.vendorName;
     data['client_name'] = this.clientName;
     data['project_manager'] = this.projectManager;
     return data;

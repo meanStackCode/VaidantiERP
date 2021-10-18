@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:scroll_app_bar/scroll_app_bar.dart';
 import 'package:test_app_flutter/models/dashboardModel/opportunities_response_model.dart';
 
 class OpportunityDetailScreen extends StatefulWidget {
@@ -11,10 +12,12 @@ class OpportunityDetailScreen extends StatefulWidget {
 }
 
 class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
+  final controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ScrollAppBar(
+        controller: controller,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
@@ -33,6 +36,7 @@ class OpportunityDetailScreenState extends State<OpportunityDetailScreen> {
           child: Container(
               padding: EdgeInsets.only(left: 16.0, right: 16.0),
               child: ListView(
+                controller: controller,
                 children: [
                   SizedBox(
                     height: 30,
