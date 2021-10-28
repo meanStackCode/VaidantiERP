@@ -14,6 +14,7 @@ class TaskListScreen extends StatefulWidget {
 
 class TasksPageState extends State<TaskListScreen> {
   TextEditingController taskNameController = TextEditingController();
+  TextEditingController descController = TextEditingController();
   TextEditingController searchController = new TextEditingController();
   bool loading = false;
   bool isDateSelected = false;
@@ -229,7 +230,7 @@ class TasksPageState extends State<TaskListScreen> {
                                   margin:
                                       EdgeInsets.symmetric(horizontal: 12.0),
                                   child: TextField(
-                                      controller: taskNameController,
+                                      controller: descController,
                                       decoration: InputDecoration(
                                         border: InputBorder.none,
                                         focusedBorder: InputBorder.none,
