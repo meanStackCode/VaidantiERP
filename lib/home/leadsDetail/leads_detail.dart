@@ -901,45 +901,6 @@ class LeadsDetailScreenState extends State<LeadsDetailScreen> {
                           )),
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 16.0,
-                  // ),
-                  // Container(
-                  //   alignment: Alignment.topLeft,
-                  //   child: Text('Participants',
-                  //       style: TextStyle(
-                  //         color: Colors.black,
-                  //         fontSize: 16.0,
-                  //         fontFamily: 'Ubuntu',
-                  //         fontWeight: FontWeight.w500,
-                  //       )),
-                  // ),
-                  // SizedBox(
-                  //   height: 6,
-                  // ),
-                  // Container(
-                  //   height: 40,
-                  //   padding: EdgeInsets.only(left: 16.0),
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     border: Border.all(
-                  //       width: 0.2,
-                  //       color: Colors.grey,
-                  //     ),
-                  //     borderRadius: BorderRadius.circular(4.0),
-                  //   ),
-                  //   child: Align(
-                  //     alignment: Alignment.centerLeft,
-                  //     child: Text('ABCd',
-                  //         textAlign: TextAlign.center,
-                  //         style: TextStyle(
-                  //           color: Colors.black87,
-                  //           fontSize: 14.0,
-                  //           fontFamily: 'Ubuntu',
-                  //           fontWeight: FontWeight.w300,
-                  //         )),
-                  //   ),
-                  // ),
                   SizedBox(
                     height: 16.0,
                   ),
