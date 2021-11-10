@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:test_app_flutter/models/dashboardModel/task_response_model.dart';
 import 'package:test_app_flutter/utils/constants.dart';
@@ -15,7 +18,7 @@ class TaskListScreen extends StatefulWidget {
 class TasksPageState extends State<TaskListScreen> {
   TextEditingController taskNameController = TextEditingController();
   TextEditingController descController = TextEditingController();
-  TextEditingController searchController = new TextEditingController();
+  TextEditingController searchController = TextEditingController();
   bool loading = false;
   bool isDateSelected = false;
   TaskListResponseModel resModel;
@@ -25,6 +28,7 @@ class TasksPageState extends State<TaskListScreen> {
   List<TaskData> taskSearchResult = [];
   List<TaskData> taskData = [];
   DateTime selectedDate = DateTime.now();
+  List<File> imageArr = [];
 
   @override
   Widget build(BuildContext context) {
@@ -247,6 +251,39 @@ class TasksPageState extends State<TaskListScreen> {
                                         fontWeight: FontWeight.w300,
                                       ),
                                       textInputAction: TextInputAction.done)),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 12.0),
+                                height: MediaQuery.of(context).size.height * 0.35,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: imageArr.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width * 0.6,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 8.0, horizontal: 10.0),
+                                        child: Card(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(2.0),
+                                            ),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Image.file(
+                                                  imageArr[index],
+                                                  key: UniqueKey(),
+                                                )
+                                              ],
+                                            )),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
                             ],
                           ),
                           Align(
@@ -255,19 +292,28 @@ class TasksPageState extends State<TaskListScreen> {
                                 padding: EdgeInsets.all(14.0),
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      Icons.camera,
-                                      color: Colors.blue[600],
+                                    InkWell(
+                                      onTap: _imgFromCamera,
+                                      child: Icon(
+                                        Icons.camera,
+                                        color: Colors.blue[600],
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 20.0,
                                     ),
-                                    Icon(Icons.photo, color: Colors.blue[600]),
+                                    InkWell(
+                                      onTap: _imgFromGallery,
+                                      child: Icon(Icons.photo,
+                                          color: Colors.blue[600]),
+                                    ),
                                     SizedBox(
                                       width: 20.0,
                                     ),
-                                    Icon(Icons.attach_file_rounded,
-                                        color: Colors.blue[600])
+                                    InkWell(
+                                      child: Icon(Icons.attach_file_rounded,
+                                          color: Colors.blue[600]),
+                                    )
                                   ],
                                 ),
                               )),
@@ -303,7 +349,7 @@ class TasksPageState extends State<TaskListScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(0.0),
-                        child: new Card(
+                        child: Card(
                           elevation: 4.0,
                           shadowColor: Colors.grey[800],
                           child: TextField(
@@ -528,6 +574,24 @@ class TasksPageState extends State<TaskListScreen> {
     super.initState();
     loading = true;
     loadProjectsData();
+  }
+
+  _imgFromCamera() async {
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 50);
+
+    setState(() {
+      if (image != null) imageArr.add(image);
+    });
+  }
+
+  _imgFromGallery() async {
+    File image = await ImagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 50);
+
+    setState(() {
+      if (image != null) imageArr.add(image);
+    });
   }
 
   /// api method called to load the profile data
