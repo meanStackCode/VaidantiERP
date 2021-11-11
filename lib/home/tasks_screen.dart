@@ -256,13 +256,13 @@ class TasksPageState extends State<TaskListScreen> {
                               ),
                               Container(
                                 margin: EdgeInsets.symmetric(horizontal: 12.0),
-                                height: MediaQuery.of(context).size.height * 0.35,
+                                height: 100.0,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: imageArr.length,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      width: MediaQuery.of(context).size.width * 0.6,
+                                      width: MediaQuery.of(context).size.width * 0.2,
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(
                                             vertical: 8.0, horizontal: 10.0),
@@ -276,6 +276,7 @@ class TasksPageState extends State<TaskListScreen> {
                                                 Image.file(
                                                   imageArr[index],
                                                   key: UniqueKey(),
+                                                  fit: BoxFit.cover
                                                 )
                                               ],
                                             )),
