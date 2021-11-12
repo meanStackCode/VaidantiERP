@@ -28,7 +28,7 @@ class TasksPageState extends State<TaskListScreen> {
   List<TaskData> taskSearchResult = [];
   List<TaskData> taskData = [];
   DateTime selectedDate = DateTime.now();
-  List<File> imageArr = [];
+  List<Image> imageArr = [];
 
   @override
   Widget build(BuildContext context) {
@@ -262,10 +262,11 @@ class TasksPageState extends State<TaskListScreen> {
                                   itemCount: imageArr.length,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      width: MediaQuery.of(context).size.width * 0.2,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.2,
                                       child: Padding(
                                         padding: EdgeInsets.symmetric(
-                                            vertical: 8.0, horizontal: 10.0),
+                                            vertical: 2.0, horizontal: 10.0),
                                         child: Card(
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -273,11 +274,9 @@ class TasksPageState extends State<TaskListScreen> {
                                             ),
                                             child: Column(
                                               children: <Widget>[
-                                                Image.file(
-                                                  imageArr[index],
-                                                  key: UniqueKey(),
-                                                  fit: BoxFit.cover
-                                                )
+                                                Image.file(imageArr[index],
+                                                    key: UniqueKey(),
+                                                    fit: BoxFit.cover)
                                               ],
                                             )),
                                       ),
@@ -579,19 +578,19 @@ class TasksPageState extends State<TaskListScreen> {
 
   _imgFromCamera() async {
     File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
+        source: ImageSource.camera, imageQuality: 80);
 
     setState(() {
-      if (image != null) imageArr.add(image);
+      if (image != null) imageArr.add(Image.file(image));
     });
   }
 
   _imgFromGallery() async {
     File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
+        source: ImageSource.gallery, imageQuality: 80);
 
     setState(() {
-      if (image != null) imageArr.add(image);
+      if (image != null) imageArr.add(Image.file(image));
     });
   }
 
