@@ -274,9 +274,7 @@ class TasksPageState extends State<TaskListScreen> {
                                             ),
                                             child: Column(
                                               children: <Widget>[
-                                                Image.file(imageArr[index],
-                                                    key: UniqueKey(),
-                                                    fit: BoxFit.cover)
+                                                imageArr[index]
                                               ],
                                             )),
                                       ),
